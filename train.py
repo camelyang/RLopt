@@ -138,8 +138,8 @@ def train(imgpath, maskpath):
     dataloaders = DataLoader(dataset, batch_size=1)
     metric = SegmentationMetric(2)
 
-    num_epoch = 15
-    n_steps = 800  
+    num_epoch = 10
+    n_steps = 800
 
     for epoch in range(num_epoch):
         print("*"*30, epoch+1)
@@ -192,7 +192,7 @@ def train(imgpath, maskpath):
             metric.reset()
             print(batch_idx, "origin", iou_pre)
 
-            for step in range(1000):
+            for step in range(800):
                 next_state = state.copy()
                 action = dqn.choose_action(state/255)
                 next_state[(next_state >= action-5) & (next_state <= action+5)] = 255
@@ -275,7 +275,7 @@ def val(imgpath, maskpath):
     # model.load_state_dict(torch.load(model_path, map_location=device))
 
     dqn = DQN(MEMORY_CAPACITY, NUM_STATE, 16, 0.001, 2000, [448,448], [100,256]).to(device)
-    dqn.load_state_dict(torch.load("NestedUNet_wo-ds/dqn_epoch_15.pth", map_location=device))
+    dqn.load_state_dict(torch.load("dqn_epoch_10.pth", map_location=device))
 
     dataset = SegDataset(imgpath, maskpath, transforms.ToTensor())
     dataloaders = DataLoader(dataset, batch_size=1)
@@ -297,7 +297,7 @@ def val(imgpath, maskpath):
         metric.reset()
         print(batch_idx, "origin", iou_pre)
 
-        for step in range(1000):
+        for step in range(800):
             next_state = state.copy()
             action = dqn.choose_action(state / 255)
             next_state[(next_state >= action - 5) & (next_state <= action + 5)] = 255
@@ -383,7 +383,7 @@ def test(model_path, imgpath, maskpath):
         state = feature_map.copy() * 255
 
 
-        for step in range(1000):
+        for step in range(800):
             next_state = state.copy()
             action = dqn.choose_action(state/255)
             next_state[(next_state >= action-5) & (next_state <= action+5)] = 255
