@@ -16,8 +16,8 @@ import matplotlib.pyplot as plt
 # model_path = "/home/merrytong/workspace/UNetVersion/AttentionUNet_CFD/focalloss_weights_100.pth"
 # model_path = "/home/merrytong/workspace/UNetVersion/UNet2plus_CFD/weights_100.pth"
 # model_path = "/home/merrytong/workspace/UNetVersion/UNet2plus_CFD_wo-ds/focalloss_weights_100.pth"
-imgpath = "G:\DeepCrack\deepcrack_results1\img"
-maskpath = "G:\DeepCrack\deepcrack_results1\lab"
+imgpath = "/kaggle/input/deepcrack-results1/deepcrack_results1/img"
+maskpath = "/kaggle/input/deepcrack-results1/deepcrack_results1/lab"
 # imgpath = "G:\DeepCrack\deepcrack_results2\img"
 # maskpath = "G:\DeepCrack\deepcrack_results2\lab"
 
